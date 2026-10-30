@@ -16,3 +16,16 @@ class Cours:
 
     def nb_etudiants(self) -> int:
         return sum(s.nb_etudiants() for s in self.sessions)
+
+    def iter_etudiants(self):
+        for session in self.sessions:
+            yield from session.iter_etudiants()
+
+    def to_dict(self) -> dict:
+        return {
+            "type": "cours",
+            "nom": self.nom,
+            "moyenne": self.moyenne(),
+            "nb_etudiants": self.nb_etudiants(),
+            "enfants": [session.to_dict() for session in self.sessions]
+        }

@@ -11,3 +11,15 @@ class Etudiant:
         if not self.evaluations:
             return 0.0
         return round(sum(self.evaluations.values()) / len(self.evaluations), 1)
+
+    def iter_etudiants(self):
+        yield self
+
+    def to_dict(self) -> dict:
+        return {
+            "type": "etudiant",
+            "nom": self.nom_complet(),
+            "moyenne": self.moyenne(),
+            "nb_etudiants": 1,
+            "evaluations": self.evaluations
+        }

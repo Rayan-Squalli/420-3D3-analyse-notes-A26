@@ -16,3 +16,16 @@ class GroupeCours:
 
     def nb_etudiants(self) -> int:
         return len(self.etudiants)
+
+    def iter_etudiants(self):
+        for etudiant in self.etudiants:
+            yield from etudiant.iter_etudiants()
+
+    def to_dict(self) -> dict:
+        return {
+            "type": "groupecours",
+            "nom": self.nom,
+            "moyenne": self.moyenne(),
+            "nb_etudiants": self.nb_etudiants(),
+            "enfants": [etudiant.to_dict() for etudiant in self.etudiants]
+        }
